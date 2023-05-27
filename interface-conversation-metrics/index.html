@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Metrics</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    <style>
+        #sentimentFormalityGraph {
+            width: 80%;
+            height: 600px;
+            float: left;
+        }
+        #chatLog{
+            max-height: 450px;
+            overflow: auto;
+            width:20%;
+            float: right;
+        }
+        #lineGraph{
+            width:100%;
+            height:250px;
+            max-width:100%;
+            display: flex;
+        }
+        #wordCloud {
+            width: 20%;
+            height: 150px;
+            max-width:100%;
+            float: right;
+        }
+        #entityTree{
+            width: 80%;
+            height: 900px;
+            display: flex;
+        }
+        .chat {
+            border: 2px solid #dedede;
+            background-color: lightgrey;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            font-size:small;
+        }
+        .system {
+            border-color: rgb(255, 255, 208);
+            background-color:rgb(255, 210, 128);
+            text-align: right;
+        }
+        .chat::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .chat img {
+            float: left;
+            max-width: 40px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+        .chat img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right:0;
+            }
+        .chat-id-right {
+            float: right;
+            color: darkgray;
+            font-style: normal;
+            font-size: x-small;
+        }
+        .chat-id-left {
+            float: left;
+            color: gray;
+            font-style: normal;
+            font-size: x-small;
+        }
+        .messages {
+            flex: 1 1 auto;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        .conversation-input {
+            background: none;
+            border: none;
+            outline: none!important;
+            resize: none; 
+            font-size: 15px;
+            height: 24px;
+            margin: 0;
+            padding-right: 20px;
+            padding-left: 100px;
+            width: 265px;
+            color: #444;
+        }
+        .conversation-submit {
+            position: absolute;
+            z-index: 1;
+            color: #4A90E2;
+            border: none;
+            background: #fff;
+            font-size: 12px;
+            text-transform: uppercase;
+            line-height: 1;
+            padding: 6px 10px;
+            border-radius: 5px;
+            outline: none!important;
+            cursor:pointer;
+        }
+        .conversation-submit.clicked {
+            color: rgb(173, 211, 99);
+            font-size: 11px;
+        }
+    </style>
+    <script src="https://cdn.amcharts.com/lib/5/index.js" defer></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js" defer></script>
+    <script src="https://cdn.amcharts.com/lib/5/wc.js" defer></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" defer></script>
+    <script src="https://cdn.amcharts.com/lib/5/hierarchy.js" defer></script>
+    <script src="src/line_graph.js" defer></script>
+    <script src="src/word_cloud.js" defer></script>
+    <script src="src/entity_tree.js" defer></script>
+    <script src="src/chat_screen.js" defer></script>
+    <script src="src/sentimentFormality.js" defer></script>
+    <script src="src/exampleResponse.js" defer></script>
+    <script src="src/data_parsers.js" defer></script>
+    <script src="src/analyse.js" defer></script>
+    <script src="src/utils.js" defer></script>
+    <script src="src/main.js" defer></script>
+</head>
+<body>
+    <div id="lineGraphContainer"></div>
+    <div>       
+        <textarea id="user-input" type="text" class="conversation-input" placeholder="Insert Conversation..."></textarea>
+        <button id="api-button" type="submit" class="conversation-submit">Analyse</button>   
+    </div>  
+    <div>  
+        <div id="sentimentFormalityGraphContainer"></div>
+        <div id="chatLog"></div>
+        <div id="wordCloudContainer"></div> 
+    </div>
+    <div>
+        
+        <div id="entityTreeContainer"></div>    
+    </div>
+</body>
+</html>
