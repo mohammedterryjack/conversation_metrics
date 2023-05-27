@@ -1,12 +1,5 @@
 # Automatic Evaluation of Conversation Quality
 
-## Installation
-```
-pip install git+https://conversation_metrics:ykzJYb-StfQHHpriwe6z@git.oxolo.com/development/oxolo-kids-nlp/packages/conversation-metrics.git
-```
-
----
-
 ## Analysis Example
 ```python
 from conversation_metrics import Conversation
